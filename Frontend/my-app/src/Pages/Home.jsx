@@ -1,10 +1,12 @@
 import React from 'react'
-import BoxRow from '../component/BoxRow'
 
+import PropertyList from './PropertyList'
+import Footer from './Footer'
 const Home = () => {
   return (
     <div>
-        <BoxRow/>
+        <PropertyList/>
+        <Footer/>
     </div>
   )
 }
