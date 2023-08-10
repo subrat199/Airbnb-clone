@@ -21,38 +21,26 @@ const Profile = () => {
         console.error("Error:", error);
       }
     };
-    const fetchRecentUserData = async () => {
-      try {
-        const response = await fetch('http://localhost:5050/recent-user');
-        if (response.ok) {
-          const data = await response.json();
-          setRecentUser(data);
-        } else {
-          console.error('Error fetching recent user data');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
 
     fetchSignupData();
   });
   return (
-    <VStack align="start" spacing={4}>
-      <Text fontSize="lg" fontWeight="bold">
-        Signup Data:
-      </Text>
-      {signupData.map((user, index) => (
-        <Box key={index} borderWidth="1px" borderRadius="md" p={4}>
+    recentUser && (
+      <VStack align="center" spacing={4}>
+        <Text fontSize="lg" fontWeight="bold">
+          User Profile:
+        </Text>
+        <Box key={recentUser._id} borderWidth="1px" borderRadius="md" p={4}>
           <Image
             src="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=200"
             style={{ borderRadius: "50%" }}
           />
-          <Text>Name: {user.name}</Text>
-          <Text>Email: {user.email}</Text>
+          <Text>Name: {recentUser.name}</Text>
+          <Text>Email: {recentUser.email}</Text>
         </Box>
-      ))}
-    </VStack>
+        )
+      </VStack>
+    )
   );
 };
 

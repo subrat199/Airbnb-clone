@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdSettings } from "react-icons/md";
 
 import { Link as ReactLink } from "react-router-dom";
@@ -25,6 +25,7 @@ function Example() {
 }
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Box>
       <Flex
@@ -55,10 +56,10 @@ export default function Navbar() {
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <ReactLink to="/">
             <img
-              src="https://static.dezeen.com/uploads/2014/07/Airbnb-rebrand-by-DesignStudio_dezeen_468_8.jpg"
+              src="https://www.pngkey.com/png/detail/61-615809_logo-logo-logo-restaurant-and-hotel-logo.png"
               alt=""
-              width={"40px"}
-              height={"40px"}
+              width={"100px"}
+              height={"100px"}
               border={"black"}
             />
           </ReactLink>

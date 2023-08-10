@@ -39,6 +39,7 @@ export default function Signup() {
       );
 
       if (response.ok) {
+        alert("Signup successful")
         console.log("Signup successful");
       } else {
         console.error("Signup failed");
