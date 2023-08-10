@@ -1,28 +1,41 @@
-import { Box, Text, VStack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Box, Text, VStack } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 
 const Profile = () => {
-  const [data,setData]=useState([])
-  useEffect(()=>{
-    fetch(`https://airbnb-backend-an91.onrender.com/users/login`)
-    .then((res)=>res.json())
-    .then(((data)=>{
-      console.log(data)
-      setData(data)}))
-  })
+  const [signupData, setSignupData] = useState([]);
+  useEffect(() => {
+    const fetchSignupData = async () => {
+      try {
+        const response = await fetch(
+          "https://airbnb-backend-an91.onrender.com/users/register"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setSignupData(data);
+        } else {
+          console.error("Error fetching signup data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchSignupData();
+  });
   return (
-    
-      data.map((da)=>{
-        <Box p={4} borderWidth="1px" borderRadius="md">
-        <VStack align="start" spacing={2}>
-          <Text fontWeight="bold">{da.name}</Text>
-          <Text>{da.email}</Text>
-        </VStack>
-      </Box>
-      })
-    
+    <VStack align="start" spacing={4}>
+      <Text fontSize="lg" fontWeight="bold">
+        Signup Data:
+      </Text>
+      {signupData.map((user, index) => (
+        <Box key={index} borderWidth="1px" borderRadius="md" p={4}>
+          <Text>Name: {user.name}</Text>
+          <Text>Email: {user.email}</Text>
+          {/* Add more fields as needed */}
+        </Box>
+      ))}
+    </VStack>
+  );
+};
 
-  )
-}
-
-export default Profile
+export default Profile;

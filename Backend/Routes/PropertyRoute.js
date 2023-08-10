@@ -15,7 +15,6 @@ PropertyRouter.post("/listings", async (req, res) => {
     res.status(400).send(error);
   }
 });
-// Get all property listings
 PropertyRouter.get("/", async (req, res) => {
   try {
     const listings = await PropertyListing.find();

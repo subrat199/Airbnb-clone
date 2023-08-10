@@ -3,7 +3,7 @@ const userRouter = express.Router();
 var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { UserModel } = require("../Models/user.model");
-
+let users=[]
 userRouter.post("/register", async (req, res) => {
   const { email, pass, name } = req.body;
   try {
@@ -11,6 +11,7 @@ userRouter.post("/register", async (req, res) => {
       // Store hash in your password DB.
       const userdata = new UserModel({ email, pass: hash, name });
       await userdata.save();
+      users.push(userdata);
       res.status(200).send({ msg: "New user added" });
     });
   } catch (error) {
@@ -46,9 +47,7 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 userRouter.get('/profile', (req, res) => {
-  // Assuming req.user contains the logged-in user's details
-  const user = req.user;
-  res.json(user);
+  res.json(users);
 });
 
 module.exports = {

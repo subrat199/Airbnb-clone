@@ -21,8 +21,31 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleClick = () => {
+  const handleClick = async () => {
+    try {
+      const response = await fetch(
+        "https://airbnb-backend-an91.onrender.com/users/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, pass }),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Signup successful");
+      } else {
+        console.error("Signup failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
     navigate("/login");
   };
   return (
@@ -51,25 +74,29 @@ export default function Signup() {
             <HStack>
               <Box>
                 <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" required />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <FormLabel> Name</FormLabel>
+                  <Input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
                 </FormControl>
               </Box>
             </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input type={showPassword ? "text" : "password"}   value={pass}
+        onChange={(e) => setPassword(e.target.value)} />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
