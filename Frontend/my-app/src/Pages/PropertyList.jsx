@@ -7,15 +7,22 @@ import { context } from "../context/SearchContext";
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
   const { search } = useContext(context);
-  console.log(search)
-  useEffect(() => {
-    fetch("http://localhost:5050/property")
+  console.log(search);
+  const getData = () => {
+    fetch("https://airbnb-backend-an91.onrender.com/property")
       .then((response) => response.json())
       .then((data) => setProperties(data))
       .catch((error) => console.error("Error fetching data:", error));
+  };
+  useEffect(() => {
+    getData();
   }, []);
   useEffect(() => {
-    const results = properties.filter(property =>
+    if (search === "") {
+      getData();
+      return;
+    }
+    const results = properties.filter((property) =>
       property.title.toLowerCase().includes(search.toLowerCase())
     );
     setProperties(results);

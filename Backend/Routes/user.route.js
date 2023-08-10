@@ -45,6 +45,11 @@ userRouter.post("/login", async (req, res) => {
     console.log("login");
   }
 });
+router.get('/profile', (req, res) => {
+  // Assuming req.user contains the logged-in user's details
+  const user = req.user;
+  res.json(user);
+});
 
 module.exports = {
   userRouter,

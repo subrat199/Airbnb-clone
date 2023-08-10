@@ -10,7 +10,7 @@ const PropertyCard = ({ property }) => {
   }
   return (
     <Box borderWidth="1px" borderRadius="md" p={1} boxShadow="md" textAlign={"start"} bg={"lightcoral"}>
-      <Image src={property.image} alt={property.title} maxH="auto" objectFit="cover" width={"100%"} />
+      <Image src={property.image} alt={property.title} maxH="200px" objectFit="cover" width={"100%"} />
       <Heading as="h3" size="md" mt={2}>
         {property.title}
       </Heading>
