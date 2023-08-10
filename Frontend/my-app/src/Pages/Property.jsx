@@ -32,7 +32,7 @@ const Property = () => {
 
   const handleProperty = async () => {
     try {
-      const response = await fetch('http://localhost:5050/post', {
+      const response = await fetch('https://airbnb-backend-an91.onrender.com/property/listing', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

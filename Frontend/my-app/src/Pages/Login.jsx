@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [pass, setPassword] = useState("");
-  const {isAuth,setisAuth} = useContext()
+
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
@@ -32,7 +32,7 @@ export default function Login() {
       );
 
       if (response.ok) {
-        setisAuth(true)
+      
         alert("Login successful")
         console.log("Login successful");
       }
