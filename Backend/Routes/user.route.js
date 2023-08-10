@@ -4,6 +4,7 @@ var jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { UserModel } = require("../Models/user.model");
 let users=[]
+let recentUser=null
 userRouter.post("/register", async (req, res) => {
   const { email, pass, name } = req.body;
   try {
@@ -12,6 +13,7 @@ userRouter.post("/register", async (req, res) => {
       const userdata = new UserModel({ email, pass: hash, name });
       await userdata.save();
       users.push(userdata);
+      recentUser=userdata
       res.status(200).send({ msg: "New user added" });
     });
   } catch (error) {
@@ -47,7 +49,7 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 userRouter.get('/profile', (req, res) => {
-  res.json(users);
+  res.json(recentUser);
 });
 
 module.exports = {
